@@ -1,0 +1,40 @@
+version: '3'
+services: 
+  mock-pbx:
+    build:
+      dockerfile: ./mock-pbx/mock-pbx.dockerfile
+      context: .
+    image: echinen/mock-pbx
+    container_name: mock-pbx
+    ports: 
+      - "3001:3001"
+    networks: 
+      - dev-network
+    depends_on: 
+      - "mongodb"
+      - "backend"
+
+  backend:
+    build:
+      dockerfile: ./backend/backend.dockerfile
+      context: .
+    image: echinen/backend
+    container_name: backend
+    ports: 
+      - "3000:3000"
+    networks: 
+      - dev-network
+    depends_on: 
+      - "mongodb"
+
+  mongodb:
+    image: mongo
+    container_name: mongo-dev
+    ports: 
+      - "27017:27017"
+    networks: 
+      - dev-network
+
+networks: 
+  dev-network:
+    driver: bridge

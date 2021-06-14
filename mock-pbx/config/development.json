@@ -1,0 +1,9 @@
+{
+    "databaseConfig": {
+        "host": "mongo-dev",
+        "database": "mock-pbx"
+    },
+    "apiClientConfig": {
+        "name": "backend"
+    }
+}
